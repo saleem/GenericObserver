@@ -4,7 +4,7 @@ The class java.util.Observable and the interface java.util.Observer provide a si
 Observer/Observable pattern. However, these do not use Java generics as of JSE v7.
 
 The purpose of this simple project is to provide an alternate, generics-based framework for the
-Observable/Observer pattern. A simple test scenario -- which can be considered a reference implementation --
+Observable/Observer pattern. A simple test scenario (which can be considered a reference implementation)
 is provided.
 
 Feedback and suggestions are always welcome. Especially any suggestions on how (and if) this should be proposed

@@ -55,7 +55,7 @@ public interface Observable<T extends Observer<E>, E> {
      * Ensuring thread-safety is the responsibility of the implementing classes.
      * Passing <CODE>null</CODE> to this method should not throw any exceptions.
      *
-     * @param o the observer to be deleted.
+     * @param observer the observer to be deleted.
      */
     void deleteObserver(T observer);
 

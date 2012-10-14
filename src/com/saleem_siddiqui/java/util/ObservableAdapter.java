@@ -4,7 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Saleem Siddiqui on 10/14/12 at 12:28 AM
+ * A simple implementation class for the Observable interface.
+ * <p/>
+ * The purpose of this class -- like the several "Adapter" class in Swing -- is to simplify the code within
+ * Observable classes. Instead of implementing the Observer interfaces, class can extend this ObservableAdapter
+ * (when possible) to greatly reduce the amount of code that's needed.
+ * <p/>
+ * This class provides canonical implementation for all the methods in the Observer interface -- it is not
+ * abstract, which means that implementing classes need not implement any methods of the Observer interface.
+ * <p/>
+ * This class exposes two protected methods: <code>setChanged()</code> and <code>clearChanged</code>. Subclasses
+ * should call the <code>setChanged()</code> method to indicate when there are changes in the state of this object of
+ * which the observers have not yet been notified. Any subsequent call to <code>notifyObservers()</code>
+ * or <code>notifyObservers(Event e)</code> will then call <code>clearChanged()</code> before it exits.
  */
 public class ObservableAdapter<T extends Observer<E>, E> implements Observable<T, E> {
     private boolean changed = false;

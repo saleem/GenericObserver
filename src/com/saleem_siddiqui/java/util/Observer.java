@@ -7,7 +7,7 @@ package com.saleem_siddiqui.java.util;
  *
  * @author Saleem Siddiqui
  * @see     com.saleem_siddiqui.java.util.Observable
- */*/
+ */
 
 public interface Observer<E> {
     /**

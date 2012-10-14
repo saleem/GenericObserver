@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="genericobserver" default="all">
+
+
+    <property file="build.properties"/>
+    <!-- Uncomment the following property if no tests compilation is needed -->
+    <!--
+   <property name="skip.tests" value="true"/>
+    -->
+
+    <!-- Compiler options -->
+
+    <property name="compiler.debug" value="on"/>
+    <property name="compiler.generate.no.warnings" value="off"/>
+    <property name="compiler.args" value="-Xlint:unchecked"/>
+    <property name="compiler.max.memory" value="128m"/>
+    <patternset id="ignored.files">
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/SCCS/**"/>
+        <exclude name="**/RCS/**"/>
+        <exclude name="**/rcs/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="**/.pyc/**"/>
+        <exclude name="**/.pyo/**"/>
+        <exclude name="**/*.pyc/**"/>
+        <exclude name="**/*.pyo/**"/>
+        <exclude name="**/.git/**"/>
+        <exclude name="**/*.hprof/**"/>
+        <exclude name="**/_svn/**"/>
+        <exclude name="**/.hg/**"/>
+        <exclude name="**/*.lib/**"/>
+        <exclude name="**/*~/**"/>
+        <exclude name="**/__pycache__/**"/>
+        <exclude name="**/.bundle/**"/>
+        <exclude name="**/vssver.scc/**"/>
+        <exclude name="**/vssver2.scc/**"/>
+        <exclude name="**/*.rbc/**"/>
+    </patternset>
+    <patternset id="library.patterns">
+        <include name="*.war"/>
+        <include name="*.ear"/>
+        <include name="*.apk"/>
+        <include name="*.zip"/>
+        <include name="*.swc"/>
+        <include name="*.ane"/>
+        <include name="*.egg"/>
+        <include name="*.jar"/>
+    </patternset>
+    <patternset id="compiler.resources">
+        <include name="**/?*.properties"/>
+        <include name="**/?*.xml"/>
+        <include name="**/?*.gif"/>
+        <include name="**/?*.png"/>
+        <include name="**/?*.jpeg"/>
+        <include name="**/?*.jpg"/>
+        <include name="**/?*.html"/>
+        <include name="**/?*.dtd"/>
+        <include name="**/?*.tld"/>
+        <include name="**/?*.ftl"/>
+    </patternset>
+
+    <!-- JDK definitions -->
+
+    <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
+    <path id="jdk.classpath.1.6">
+        <fileset dir="${jdk.home.1.6}">
+            <include name="lib/deploy.jar"/>
+            <include name="lib/dt.jar"/>
+            <include name="lib/javaws.jar"/>
+            <include name="lib/jce.jar"/>
+            <include name="lib/jconsole.jar"/>
+            <include name="lib/management-agent.jar"/>
+            <include name="lib/plugin.jar"/>
+            <include name="lib/sa-jdi.jar"/>
+            <!--
+            <include name="../Classes/alt-rt.jar"/>
+            <include name="../Classes/alt-string.jar"/>
+            <include name="../Classes/charsets.jar"/>
+            <include name="../Classes/classes.jar"/>
+            <include name="../Classes/jsse.jar"/>
+            <include name="../Classes/ui.jar"/>
+            -->
+            <include name="lib/ext/apple_provider.jar"/>
+            <include name="lib/ext/dnsns.jar"/>
+            <include name="lib/ext/localedata.jar"/>
+            <include name="lib/ext/sunjce_provider.jar"/>
+            <include name="lib/ext/sunpkcs11.jar"/>
+        </fileset>
+    </path>
+
+    <property name="project.jdk.home" value="${jdk.home.1.6}"/>
+    <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
+    <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
+
+
+    <!-- Global Libraries -->
+
+    <!-- Modules -->
+
+
+    <!-- Module GenericObserver -->
+
+    <dirname property="module.genericobserver.basedir" file="${ant.file}"/>
+
+
+    <property name="module.jdk.home.genericobserver" value="${project.jdk.home}"/>
+    <property name="module.jdk.bin.genericobserver" value="${project.jdk.bin}"/>
+    <property name="module.jdk.classpath.genericobserver" value="${project.jdk.classpath}"/>
+
+    <property name="compiler.args.genericobserver" value="${compiler.args}"/>
+
+    <property name="genericobserver.output.dir"
+              value="${module.genericobserver.basedir}/out/production/GenericObserver"/>
+    <property name="genericobserver.testoutput.dir" value="${module.genericobserver.basedir}/out/test/GenericObserver"/>
+    <property name="genericobserver.testresult.dir" value="${module.genericobserver.basedir}/out/testresults/OOB"/>
+
+    <path id="genericobserver.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="genericobserver.module.production.classpath">
+        <path refid="${module.jdk.classpath.genericobserver}"/>
+        <fileset dir="${basedir}/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+    <path id="genericobserver.runtime.production.module.classpath">
+        <pathelement location="${genericobserver.output.dir}"/>
+        <fileset dir="${basedir}/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+    <path id="genericobserver.module.classpath">
+        <path refid="${module.jdk.classpath.genericobserver}"/>
+        <pathelement location="${genericobserver.output.dir}"/>
+        <fileset dir="${basedir}/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+    <path id="genericobserver.runtime.module.classpath">
+        <pathelement location="${genericobserver.testoutput.dir}"/>
+        <pathelement location="${genericobserver.output.dir}"/>
+        <fileset dir="${basedir}/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+
+    <patternset id="excluded.from.module.genericobserver">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.genericobserver">
+        <patternset refid="excluded.from.module.genericobserver"/>
+    </patternset>
+
+    <path id="genericobserver.module.sourcepath">
+        <dirset dir="${module.genericobserver.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+    <path id="genericobserver.module.test.sourcepath">
+        <dirset dir="${module.genericobserver.basedir}">
+            <include name="test"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.genericobserver"
+            depends="compile.module.genericobserver.production,compile.module.genericobserver.tests"
+            description="Compile module GenericObserver"/>
+
+    <target name="compile.module.genericobserver.production"
+            description="Compile module GenericObserver; production classes">
+        <mkdir dir="${genericobserver.output.dir}"/>
+        <javac destdir="${genericobserver.output.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true"
+               executable="${module.jdk.bin.genericobserver}/javac" includeantruntime="false">
+            <compilerarg line="${compiler.args.genericobserver}"/>
+            <bootclasspath refid="genericobserver.module.bootclasspath"/>
+            <classpath refid="genericobserver.module.production.classpath"/>
+            <src refid="genericobserver.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.genericobserver"/>
+        </javac>
+
+        <copy todir="${genericobserver.output.dir}">
+            <fileset dir="${module.genericobserver.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.genericobserver.tests" depends="compile.module.genericobserver.production"
+            description="compile module GenericObserver; test classes" unless="skip.tests">
+        <mkdir dir="${genericobserver.testoutput.dir}"/>
+        <javac destdir="${genericobserver.testoutput.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true"
+               executable="${module.jdk.bin.genericobserver}/javac" includeantruntime="false">
+            <compilerarg line="${compiler.args.genericobserver}"/>
+            <bootclasspath refid="genericobserver.module.bootclasspath"/>
+            <classpath refid="genericobserver.module.classpath"/>
+            <src refid="genericobserver.module.test.sourcepath"/>
+            <patternset refid="excluded.from.compilation.genericobserver"/>
+        </javac>
+
+        <copy todir="${genericobserver.testoutput.dir}">
+            <fileset dir="${module.genericobserver.basedir}/test">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="clean.module.genericobserver" description="cleanup module">
+        <delete dir="${genericobserver.output.dir}"/>
+        <delete dir="${genericobserver.testoutput.dir}"/>
+    </target>
+
+    <target name="init" description="Build initialization">
+        <!-- Perform any build initialization in this target -->
+    </target>
+
+    <target name="clean" depends="clean.module.genericobserver" description="cleanup all"/>
+
+    <target name="build.modules" depends="init, clean, compile.module.genericobserver" description="build all modules"/>
+
+    <target name="test" description="Execute unit tests"
+            depends="compile.module.genericobserver.tests">
+        <mkdir dir="${genericobserver.testresult.dir}"/>
+        <junit printsummary="true" failureproperty="junit.failure">
+            <classpath refid="genericobserver.runtime.module.classpath"/>
+
+            <batchtest todir="${genericobserver.testresult.dir}">
+                <fileset dir="${genericobserver.testoutput.dir}"/>
+                <formatter type="xml"/>
+            </batchtest>
+        </junit>
+        <junitreport todir="${genericobserver.testresult.dir}">
+            <fileset dir="${genericobserver.testresult.dir}"/>
+            <report todir="test-reports"/>
+        </junitreport>
+        <fail if="junit.failure" message="Unit test(s) failed.  See reports!"/>
+    </target>
+
+    <target name="all" depends="build.modules, test" description="build all"/>
+</project>

@@ -1,12 +1,14 @@
 package com.saleem_siddiqui.java.util.elvis;
 
 import com.saleem_siddiqui.java.util.Observable;
+import org.junit.Ignore;
 
 import java.io.PrintStream;
 
 /**
  * Created by Saleem Siddiqui on 10/14/12 at 12:48 AM
  */
+@Ignore
 public class FanaticalElvisObserver extends ElvisObserver {
     private final PrintStream out;
     public FanaticalElvisObserver(PrintStream out) {

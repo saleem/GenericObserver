@@ -1,7 +1,6 @@
 package com.saleem_siddiqui.java.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,10 +32,10 @@ public class ObservableAdapter<T extends Observer<E>, E> implements Observable<T
     }
 
     public void notifyObservers(E event) {
-        List<T> localCopy = new ArrayList<T>(obs.size());
+        List<T> localCopy = null;
         synchronized (this) {
             if(!changed) return;
-            Collections.copy(localCopy, obs);
+            localCopy = new ArrayList<T>(obs);
             clearChanged();
         }
         notifyObservers(localCopy, event);

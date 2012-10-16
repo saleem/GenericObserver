@@ -9,3 +9,5 @@ is provided.
 
 Feedback and suggestions are always welcome. Especially any suggestions on how (and if) this should be proposed
 as a JSR would be greatly appreciated.
+
+This software is released under the MIT license (http://opensource.org/licenses/mit-license.php).

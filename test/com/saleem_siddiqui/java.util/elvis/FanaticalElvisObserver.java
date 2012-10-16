@@ -1,6 +1,5 @@
 package com.saleem_siddiqui.java.util.elvis;
 
-import com.saleem_siddiqui.java.util.Observable;
 import org.junit.Ignore;
 
 import java.io.PrintStream;
@@ -14,7 +13,7 @@ public class FanaticalElvisObserver extends ElvisObserver {
     public FanaticalElvisObserver(PrintStream out) {
         this.out = out;
     }
-    public void update(Observable observable, ElvisEvent event) {
+    public void update(Elvis observable, ElvisEvent event) {
            out.printf("News Flash: the King was sighted on %D!!\n", event.getLatestSightingDate());
     }
 }

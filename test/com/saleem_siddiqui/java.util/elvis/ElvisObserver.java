@@ -7,5 +7,5 @@ import org.junit.Ignore;
  * Created by Saleem Siddiqui on 10/14/12 at 8:19 AM
  */
 @Ignore
-public abstract class ElvisObserver implements Observer<ElvisEvent> {
+public abstract class ElvisObserver implements Observer<Elvis, ElvisEvent> {
 }

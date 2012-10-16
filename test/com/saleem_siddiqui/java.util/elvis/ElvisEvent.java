@@ -15,7 +15,6 @@ public class ElvisEvent {
         return finalDate;
     }
     public ElvisEvent(Date date) {
-//        this.finalDate = date != null ? date : new GregorianCalendar(1977, Calendar.AUGUST, 16).getTime();
         this.finalDate = date;
     }
 }

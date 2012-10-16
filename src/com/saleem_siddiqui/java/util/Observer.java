@@ -9,7 +9,7 @@ package com.saleem_siddiqui.java.util;
  * @see     com.saleem_siddiqui.java.util.Observable
  */
 
-public interface Observer<E> {
+public interface Observer<T extends Observable<E>, E> {
     /**
      * This method is called whenever the observed object is changed. An
      * application calls an <tt>Observable</tt> object's
@@ -20,5 +20,5 @@ public interface Observer<E> {
      * @param event an argument passed to the <code>notifyObservers</code>
      *            method.
      */
-    public void update(Observable observable, E event);
+    public void update(T observable, E event);
 }

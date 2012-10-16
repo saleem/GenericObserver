@@ -18,15 +18,15 @@ import java.util.List;
  * which the observers have not yet been notified. Any subsequent call to <code>notifyObservers()</code>
  * or <code>notifyObservers(Event e)</code> will then call <code>clearChanged()</code> before it exits.
  */
-public class ObservableAdapter<T extends Observer<E>, E> implements Observable<T, E> {
+public class ObservableAdapter<E> implements Observable<E> {
     private boolean changed = false;
-    private List<T> obs;
+    private List<Observer> obs;
 
     public ObservableAdapter() {
-        obs = new ArrayList<T>();
+        obs = new ArrayList<Observer>();
     }
 
-    public synchronized void addObserver(T observer) {
+    public synchronized void addObserver(Observer observer) {
         if (observer == null) {
             throw new NullPointerException();
         }
@@ -35,7 +35,7 @@ public class ObservableAdapter<T extends Observer<E>, E> implements Observable<T
         }
     }
 
-    public synchronized void deleteObserver(T observer) {
+    public synchronized void deleteObserver(Observer observer) {
         obs.remove(observer);
     }
 
@@ -44,10 +44,10 @@ public class ObservableAdapter<T extends Observer<E>, E> implements Observable<T
     }
 
     public void notifyObservers(E event) {
-        List<T> localCopy = null;
+        List<Observer> localCopy = null;
         synchronized (this) {
             if(!changed) return;
-            localCopy = new ArrayList<T>(obs);
+            localCopy = new ArrayList<Observer>(obs);
             clearChanged();
         }
         notifyObservers(localCopy, event);
@@ -66,7 +66,7 @@ public class ObservableAdapter<T extends Observer<E>, E> implements Observable<T
      * @param event
      */
     @SuppressWarnings("unchecked")
-    private void notifyObservers(List<T> observerList, E event) {
+    private void notifyObservers(List<Observer> observerList, E event) {
         for (Observer o : obs)  {
             o.update(this, event);
         }

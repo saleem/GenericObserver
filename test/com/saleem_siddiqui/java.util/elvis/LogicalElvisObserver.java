@@ -1,6 +1,5 @@
 package com.saleem_siddiqui.java.util.elvis;
 
-import com.saleem_siddiqui.java.util.Observable;
 import org.junit.Ignore;
 
 import java.io.PrintStream;
@@ -19,7 +18,7 @@ public class LogicalElvisObserver extends ElvisObserver {
     public LogicalElvisObserver(PrintStream out) {
         this.out = out;
     }
-    public void update(Observable observable, ElvisEvent event) {
+    public void update(Elvis observable, ElvisEvent event) {
         if (LAST_SIGHTING_DATE.before(event.getLatestSightingDate())) {
            out.printf("An unreliable Elvis sighting reported on %D\n", event.getLatestSightingDate());
         }

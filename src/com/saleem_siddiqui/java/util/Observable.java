@@ -36,7 +36,7 @@ package com.saleem_siddiqui.java.util;
  * @see com.saleem_siddiqui.java.util.Observer#update(Observable, Object)
  * @see java.util.Observer
  */
-public interface Observable<T extends Observer<E>, E> {
+public interface Observable<E> {
 
     /**
      * Implementing classes should supply logic to safely add an observer to the set of observers for this object,
@@ -48,7 +48,7 @@ public interface Observable<T extends Observer<E>, E> {
      * @param observer an observer to be added.
      * @throws NullPointerException if the parameter observer is null.
      */
-    void addObserver(T observer);
+    void addObserver(Observer observer);
 
     /**
      * Implementing classes should supply logic to safely delete an observer from the set of observers of this object.
@@ -57,7 +57,7 @@ public interface Observable<T extends Observer<E>, E> {
      *
      * @param observer the observer to be deleted.
      */
-    void deleteObserver(T observer);
+    void deleteObserver(Observer observer);
 
     /**
      * If this object has changed, as indicated by the

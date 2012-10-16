@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by Saleem Siddiqui on 10/14/12 at 12:50 AM
  */
 @Ignore
-public class Elvis extends ObservableAdapter<ElvisObserver, ElvisEvent> {
+public class Elvis extends ObservableAdapter<ElvisEvent> {
     private Elvis() {
     }
     private static final Elvis theOne = new Elvis();

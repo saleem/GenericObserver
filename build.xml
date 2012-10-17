@@ -235,9 +235,10 @@
         <mkdir dir="${genericobserver.testresult.dir}"/>
         <junit printsummary="true" failureproperty="junit.failure">
             <classpath refid="genericobserver.runtime.module.classpath"/>
-
             <batchtest todir="${genericobserver.testresult.dir}">
-                <fileset dir="${genericobserver.testoutput.dir}"/>
+                <fileset dir="${genericobserver.testoutput.dir}">
+                    <include name="**/*Test*.class"/>
+                </fileset>
                 <formatter type="xml"/>
             </batchtest>
         </junit>

@@ -1,7 +1,7 @@
 package com.saleem_siddiqui.java.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple implementation class for the Observable interface.
@@ -20,18 +20,21 @@ import java.util.List;
  */
 public class ObservableAdapter<E> implements Observable<E> {
     private boolean changed = false;
-    private List<Observer> obs;
+    private Map<Observer, Filter> obs;
 
     public ObservableAdapter() {
-        obs = new ArrayList<Observer>();
+        obs = new HashMap<Observer, Filter>();
     }
 
     public synchronized void addObserver(Observer observer) {
-        if (observer == null) {
-            throw new NullPointerException();
-        }
-        if (!obs.contains(observer)) {
-            obs.add(observer);
+        obs.put(observer, ALLOW_ALL_FILTER);
+    }
+
+    public synchronized void addObserver(Observer observer, Filter<E> filter) {
+        if (observer == null) throw new NullPointerException();
+        if (filter == null) throw new NullPointerException();
+        if (!obs.containsKey(observer)) {
+            obs.put(observer, filter);
         }
     }
 
@@ -44,10 +47,10 @@ public class ObservableAdapter<E> implements Observable<E> {
     }
 
     public void notifyObservers(E event) {
-        List<Observer> localCopy = null;
+        Map<Observer, Filter> localCopy = null;
         synchronized (this) {
-            if(!changed) return;
-            localCopy = new ArrayList<Observer>(obs);
+            if (!changed) return;
+            localCopy = new HashMap<Observer, Filter>(obs);
             clearChanged();
         }
         notifyObservers(localCopy, event);
@@ -60,20 +63,23 @@ public class ObservableAdapter<E> implements Observable<E> {
      * The operations are only <i>theoretically</i> type unsafe, because in reality, the compiler will verify that
      * both Observer and Observable are coupled to the same "Event" type. This type check is performed for the
      * addObserver() method of this class -- the only way to associate Observers with this ObservableAdapter.
-     * Therefore, there cannot be any Observers in the observerList that aren't "related" to this ObservableAdapter
+     * Therefore, there cannot be any Observers in the observerMap that aren't "related" to this ObservableAdapter
      * through the same "Event" type.
-     * @param observerList
+     *
+     * @param observerMap
      * @param event
      */
     @SuppressWarnings("unchecked")
-    private void notifyObservers(List<Observer> observerList, E event) {
-        for (Observer o : obs)  {
-            o.update(this, event);
+    private void notifyObservers(Map<Observer, Filter> observerMap, E event) {
+        for (Map.Entry<Observer, Filter> entry : obs.entrySet()) {
+            if (entry.getValue().accept(event)) {
+                entry.getKey().update(this, event);
+            }
         }
     }
 
     public synchronized void deleteObservers() {
-        obs.removeAll(obs);
+        obs.clear();
     }
 
     public synchronized boolean hasChanged() {
@@ -91,4 +97,10 @@ public class ObservableAdapter<E> implements Observable<E> {
     protected synchronized void clearChanged() {
         changed = false;
     }
+
+    private final Filter ALLOW_ALL_FILTER = new Filter() {
+        public boolean accept(Object event) {
+            return true;
+        }
+    };
 }

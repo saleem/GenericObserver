@@ -9,10 +9,14 @@ import org.junit.Test;
 import java.io.PrintStream;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.util.Calendar.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Saleem Siddiqui on 10/13/12 at 11:49 PM
@@ -36,7 +40,7 @@ public class TestObserver {
     }
 
     @Test
-    public void fanaticalObserverReportsOnAllElvisEventsTheSameWay() {
+    public void fanaticalObserverReportsOnAllElvisEvents() {
         elvis.addObserver(fanaticalElvisObserver);
 
         elvis.observedOn(born);
@@ -52,8 +56,8 @@ public class TestObserver {
     }
 
     @Test
-    public void logicalObserverReportsDifferentSightingsInDifferentWays() {
-        elvis.addObserver(logicalElvisObserver);
+    public void logicalObserverReportsOnReliableEventsOnly() {
+        elvis.addObserver(logicalElvisObserver, LogicalElvisObserver.LOGICAL_ELVIS_FILTER);
 
         elvis.observedOn(born);
         verify(mockPrintStream).printf("A possible Elvis sighting reported on %D\n", born);
@@ -62,9 +66,21 @@ public class TestObserver {
         elvis.observedOn(died);
         verify(mockPrintStream).printf("A possible Elvis sighting reported on %D\n", died);
         elvis.observedOn(today);
-        verify(mockPrintStream).printf("An unreliable Elvis sighting reported on %D\n", today);
+        verify(mockPrintStream, never()).printf(anyString());
 
         elvis.deleteObserver(logicalElvisObserver);
+    }
+
+    @Test
+    public void mapClearWorks() {
+        Map<Integer, String> map = new HashMap<Integer, String>();
+        map.put(1, "One");
+        map.put(2, "Two");
+        map.put(3, "Three");
+        map.put(Integer.MAX_VALUE, "Max Value");
+        assertThat(map.keySet().size(), is(4));
+        map.clear();
+        assertThat(map.keySet().size(), is(0));
     }
 }
 

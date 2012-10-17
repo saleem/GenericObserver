@@ -66,8 +66,8 @@ public class ObservableAdapter<E> implements Observable<E> {
      * Therefore, there cannot be any Observers in the observerMap that aren't "related" to this ObservableAdapter
      * through the same "Event" type.
      *
-     * @param observerMap
-     * @param event
+     * @param observerMap - the map of observers and fiters to iterate over
+     * @param event - the event to notify the observers about
      */
     @SuppressWarnings("unchecked")
     private void notifyObservers(Map<Observer, Filter> observerMap, E event) {
@@ -98,8 +98,8 @@ public class ObservableAdapter<E> implements Observable<E> {
         changed = false;
     }
 
-    private final Filter ALLOW_ALL_FILTER = new Filter() {
-        public boolean accept(Object event) {
+    private final Filter<E> ALLOW_ALL_FILTER = new Filter<E>() {
+        public boolean accept(E event) {
             return true;
         }
     };

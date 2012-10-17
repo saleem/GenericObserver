@@ -9,12 +9,8 @@ import org.junit.Test;
 import java.io.PrintStream;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import static java.util.Calendar.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -69,18 +65,6 @@ public class TestObserver {
         verify(mockPrintStream, never()).printf(anyString());
 
         elvis.deleteObserver(logicalElvisObserver);
-    }
-
-    @Test
-    public void mapClearWorks() {
-        Map<Integer, String> map = new HashMap<Integer, String>();
-        map.put(1, "One");
-        map.put(2, "Two");
-        map.put(3, "Three");
-        map.put(Integer.MAX_VALUE, "Max Value");
-        assertThat(map.keySet().size(), is(4));
-        map.clear();
-        assertThat(map.keySet().size(), is(0));
     }
 }
 

@@ -47,7 +47,7 @@ public class ObservableAdapter<E> implements Observable<E> {
     }
 
     public void notifyObservers(E event) {
-        Map<Observer, Filter> localCopy = null;
+        Map<Observer, Filter> localCopy;
         synchronized (this) {
             if (!changed) return;
             localCopy = new HashMap<Observer, Filter>(obs);
@@ -71,7 +71,7 @@ public class ObservableAdapter<E> implements Observable<E> {
      */
     @SuppressWarnings("unchecked")
     private void notifyObservers(Map<Observer, Filter> observerMap, E event) {
-        for (Map.Entry<Observer, Filter> entry : obs.entrySet()) {
+        for (Map.Entry<Observer, Filter> entry : observerMap.entrySet()) {
             if (entry.getValue().accept(event)) {
                 entry.getKey().update(this, event);
             }

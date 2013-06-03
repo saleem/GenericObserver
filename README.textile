@@ -12,8 +12,10 @@ as a JSR would be greatly appreciated.
 
 This software is released under the MIT license (http://opensource.org/licenses/mit-license.php).
 
+
 _To Do_
 
+-0.- Rename package names to be more compliant with Maven Central norms: https://docs.sonatype.org/display/Repository/Choosing+your+Coordinates
 1. Switch from ant to gradle,
 2. Remove the ant file and lib directory
 3. Change the structure to the standard maven layout of src/{main,test}/java and thus eliminating about half of the gradle build file, and 

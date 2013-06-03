@@ -1,6 +1,6 @@
-package com.saleem_siddiqui.java.util.elvis;
+package com.thoughtworks.genericObserver.elvis;
 
-import com.saleem_siddiqui.java.util.ObservableAdapter;
+import com.thoughtworks.genericObserver.ObservableAdapter;
 
 import java.util.Date;
 

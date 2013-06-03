@@ -1,8 +1,8 @@
-package com.saleem_siddiqui.java.util;
+package com.thoughtworks.genericObserver;
 
-import com.saleem_siddiqui.java.util.elvis.Elvis;
-import com.saleem_siddiqui.java.util.elvis.FanaticalElvisObserver;
-import com.saleem_siddiqui.java.util.elvis.LogicalElvisObserver;
+import com.thoughtworks.genericObserver.elvis.Elvis;
+import com.thoughtworks.genericObserver.elvis.FanaticalElvisObserver;
+import com.thoughtworks.genericObserver.elvis.LogicalElvisObserver;
 import org.junit.Before;
 import org.junit.Test;
 

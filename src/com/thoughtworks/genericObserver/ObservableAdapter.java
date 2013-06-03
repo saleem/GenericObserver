@@ -1,4 +1,4 @@
-package com.saleem_siddiqui.java.util;
+package com.thoughtworks.genericObserver;
 
 import java.util.HashMap;
 import java.util.Map;

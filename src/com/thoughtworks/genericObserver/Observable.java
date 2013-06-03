@@ -1,4 +1,4 @@
-package com.saleem_siddiqui.java.util;
+package com.thoughtworks.genericObserver;
 
 /**
  * This interface represents an observable object, or "data"

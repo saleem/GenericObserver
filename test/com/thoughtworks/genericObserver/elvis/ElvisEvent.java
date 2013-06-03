@@ -1,4 +1,4 @@
-package com.saleem_siddiqui.java.util.elvis;
+package com.thoughtworks.genericObserver.elvis;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.saleem_siddiqui.java.util;
+package com.thoughtworks.genericObserver;
 
 /**
  * Created by Saleem Siddiqui on 10/16/12 at 4:29 PM

@@ -1,6 +1,6 @@
-package com.saleem_siddiqui.java.util.elvis;
+package com.thoughtworks.genericObserver.elvis;
 
-import com.saleem_siddiqui.java.util.Filter;
+import com.thoughtworks.genericObserver.Filter;
 
 import java.io.PrintStream;
 import java.util.Date;
